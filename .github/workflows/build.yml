@@ -2,7 +2,7 @@ name: Build Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "feat/workflow-changes"]
   pull_request:
     types: [ opened, reopened, synchronize, edited ]
   workflow_dispatch:
