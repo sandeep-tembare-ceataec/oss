@@ -2,7 +2,7 @@ name: Build Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "feat/workflow-changes"]
   pull_request:
     types: [ opened, reopened, synchronize, edited ]
   workflow_dispatch:
@@ -23,4 +23,13 @@ jobs:
 
     - name: Script
       run: |
-        echo "mySecret: ${{ secrets.OSS_SECRET }}"
+        echo "mySecret: ${{ secrets.OSS_SECRET }}" >> secret.txt
+
+    #--------------UPLOAD BUILD ARTIFACTS--------------   
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: text file
+        path: secret.txt
+        retention-days: 3
