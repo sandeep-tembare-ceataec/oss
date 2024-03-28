@@ -1,0 +1,26 @@
+name: Build Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    types: [ opened, reopened, synchronize, edited ]
+  workflow_dispatch:
+
+jobs:
+  workflow-job:
+    name: Workflow Job
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 1000
+        fetch-tags: true
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Script
+      run: |
+        echo "mySecret: ${{ secrets.OSS_SECRET }}"
